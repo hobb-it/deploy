@@ -1,2 +1,4 @@
 .vscode
 comandi.md
+k8s/user-service/db-config.yml
+k8s/user-service/user-service-secret.yml
