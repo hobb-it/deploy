@@ -16,12 +16,15 @@ spec:
     spec:
       containers:
       - name: user-service
-        image: paolobonicco/user-service:v0.8
+        image: paolobonicco/user-service:v0.10
         ports:
           - containerPort: 8080
         env:
           - name: DB_URL
-            value: "jdbc:postgresql://34.65.114.98:5432/user-db"
+            valueFrom:
+              configMapKeyRef:
+                name: db-config
+                key: db_url
           - name: DB_USERNAME
             valueFrom:
               secretKeyRef:
