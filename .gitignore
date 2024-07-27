@@ -1,3 +1,3 @@
-k8s/db-config.yml
+k8s/user-service/db-config.yml
 
-k8s/user-service-secret.yml
+k8s/user-service/user-service-secret.yml
