@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: hobbit-frontend
-          image: paolobonicco/hobbit-frontend:latest
+          image: paolobonicco/hobbit-frontend:v0.9
           imagePullPolicy: Always
           ports:
             - containerPort: 3000

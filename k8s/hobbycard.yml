@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: hobbit-hobbycard
-        image: paolobonicco/hobbit-hobbycard:v0.1
+        image: paolobonicco/hobbit-hobbycard:v0.9
         ports:
           - containerPort: 8081
         env:

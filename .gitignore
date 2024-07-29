@@ -1,4 +1,5 @@
 .vscode
+.idea
 comandi.md
 db-config.yml
 user-service-secret.yml
