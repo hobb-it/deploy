@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service
+  name: hobbit-user
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-service
+      app: hobbit-user
   template:
     metadata:
       labels:
-        app: user-service
+        app: hobbit-user
         tier: backend
         track: stable
     spec:
       containers:
-      - name: user-service
-        image: paolobonicco/user-service:v1.0
+      - name: hobbit-user
+        image: paolobonicco/hobbit-user:v0.1
         ports:
           - containerPort: 8082
         env:
@@ -30,10 +30,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-service
+  name: hobbit-user
 spec:
   selector:
-    app: user-service
+    app: hobbit-user
   ports:
   - protocol: TCP
     port: 8082

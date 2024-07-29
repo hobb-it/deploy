@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hobbycard-service
+  name: hobbit-hobbycard
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hobbycard-service
+      app: hobbit-hobbycard
   template:
     metadata:
       labels:
-        app: hobbycard-service
+        app: hobbit-hobbycard
         tier: backend
         track: stable
     spec:
       containers:
-      - name: hobbycard-service
-        image: paolobonicco/hobbycard-service:v0.1
+      - name: hobbit-hobbycard
+        image: paolobonicco/hobbit-hobbycard:v0.1
         ports:
           - containerPort: 8081
         env:
@@ -30,10 +30,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hobbycard-service
+  name: hobbit-hobbycard
 spec:
   selector:
-    app: hobbycard-service
+    app: hobbit-hobbycard
   ports:
   - protocol: TCP
     port: 8081

@@ -21,11 +21,11 @@ spec:
           - containerPort: 8080
         env:
         - name: USER_SERVICE_URL
-          value: "http://user-service:8082"
+          value: "http://hobbit-user:8082"
         - name: HOBBYCARD_SERVICE_URL
-          value: "http://hobbycard-service:8081"
+          value: "http://hobbit-hobbycard:8081"
         - name: FRONTEND_URL
-          value: ""
+          value: "http://hobbit-frontend:8081"
 ---
 apiVersion: v1
 kind: Service
