@@ -16,35 +16,25 @@ spec:
     spec:
       containers:
       - name: user-service
-        image: paolobonicco/user-service:v0.10
+        image: paolobonicco/user-service:v1.0
         ports:
-          - containerPort: 8080
+          - containerPort: 8082
         env:
           - name: DB_URL
-            valueFrom:
-              configMapKeyRef:
-                name: db-config
-                key: db_url
+            value: "jdbc:postgresql://34.65.114.98:5432/user-db"
           - name: DB_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: user-service-secrets
-                key: db-username
+            value: aG9iYml0
           - name: DB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: user-service-secrets
-                key: db-password
+            value: RWg/M1V+X3NoI1hAdSYrSw==
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: user-service
 spec:
-  type: LoadBalancer
   selector:
     app: user-service
   ports:
   - protocol: TCP
-    port: 8080
-    targetPort: 8080
+    port: 8082
+    targetPort: 8082

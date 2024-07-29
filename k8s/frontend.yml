@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hobbit-frontend
+  labels:
+    app: hobbit-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hobbit-frontend
+      tier: frontend
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: hobbit-frontend
+        tier: frontend
+        track: stable
+    spec:
+      containers:
+        - name: hobbit-frontend
+          image: paolobonicco/hobbit-frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: hobbit-frontend
+spec:
+  selector:
+    app: hobbit-frontend
+    tier: frontend
+  ports:
+    - port: 3000
+      targetPort: 3000

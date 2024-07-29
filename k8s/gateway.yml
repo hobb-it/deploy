@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hobbit-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hobbit-gateway
+  template:
+    metadata:
+      labels:
+        app: hobbit-gateway
+        tier: backend
+        track: stable
+    spec:
+      containers:
+      - name: hobbit-gateway
+        image: paolobonicco/hobbit-gateway:v0.2
+        ports:
+          - containerPort: 8080
+        env:
+        - name: USER_SERVICE_URL
+          value: "http://user-service:8082"
+        - name: HOBBYCARD_SERVICE_URL
+          value: "http://hobbycard-service:8081"
+        - name: FRONTEND_URL
+          value: ""
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hobbit-gateway
+spec:
+  type: LoadBalancer
+  selector:
+    app: hobbit-gateway
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hobbycard-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hobbycard-service
+  template:
+    metadata:
+      labels:
+        app: hobbycard-service
+        tier: backend
+        track: stable
+    spec:
+      containers:
+      - name: hobbycard-service
+        image: paolobonicco/hobbycard-service:v0.1
+        ports:
+          - containerPort: 8081
+        env:
+          - name: DB_URL
+            value: "jdbc:postgresql://34.65.114.98:5432/hobbycard-db"
+          - name: DB_USERNAME
+            value: aG9iYml0
+          - name: DB_PASSWORD
+            value: RWg/M1V+X3NoI1hAdSYrSw==
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hobbycard-service
+spec:
+  selector:
+    app: hobbycard-service
+  ports:
+  - protocol: TCP
+    port: 8081
+    targetPort: 8081
