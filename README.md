@@ -10,15 +10,15 @@ Per creare questi file utilizzare i template forniti.
 Dopo di che seguire i seguenti passi:
 
 ```bash
-kubectl apply -f db-config.yml
+kubectl apply -f k8s/user-service/db-config.yml
 ```
 
 ```bash
-kubectl apply -f user-service-secret.yml
+kubectl apply -f k8s/user-service/user-service-secret.yml
 ```
 
 E infine 
 
 ```bash
-kubectl apply -f user.yml
+kubectl apply -f k8s/user-service/user.yml
 ```
