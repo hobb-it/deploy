@@ -22,3 +22,10 @@ E infine
 ```bash
 kubectl apply -f k8s/user-service/user.yml
 ```
+
+## Collegamento a Google Cloud
+
+In db-config.yml sostituisce data.db_url con:
+URL: "jdbc:postgresql://34.65.114.98:5432/user-db"
+
+In user-service-secret.yml sostituisce db-username e db-password con base64encode di User e Password
