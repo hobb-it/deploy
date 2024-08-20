@@ -16,16 +16,22 @@ spec:
     spec:
       containers:
       - name: hobbit-hobbycard
-        image: paolobonicco/hobbit-hobbycard:v0.9
+        image: paolobonicco/hobbit-hobbycard:v1.1
         ports:
           - containerPort: 8081
         env:
+          # - name: DB_URL
+          #   value: jdbc:postgresql://34.65.114.98:5432/hobbycard-db
+          # - name: DB_USERNAME
+          #   value: hobbit
+          # - name: DB_PASSWORD
+          #   value: Eh?3U~_sh#X@u&+K
           - name: DB_URL
-            value: "jdbc:postgresql://34.65.114.98:5432/hobbycard-db"
+            value: "jdbc:postgresql://host.minikube.internal:5432/users"
           - name: DB_USERNAME
-            value: aG9iYml0
+            value: admin
           - name: DB_PASSWORD
-            value: RWg/M1V+X3NoI1hAdSYrSw==
+            value: admin
 ---
 apiVersion: v1
 kind: Service

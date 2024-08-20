@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: hobbit-gateway
-        image: paolobonicco/hobbit-gateway:v0.9
+        image: paolobonicco/hobbit-gateway:v1.9
         ports:
           - containerPort: 8080
         env:
@@ -25,7 +25,7 @@ spec:
         - name: HOBBYCARD_SERVICE_URL
           value: "http://hobbit-hobbycard:8081"
         - name: FRONTEND_URL
-          value: "http://hobbit-frontend:8081"
+          value: "http://hobbit-frontend:3000"
 ---
 apiVersion: v1
 kind: Service
