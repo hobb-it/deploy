@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: hobbit-user
-        image: paolobonicco/hobbit-user:v1.1
+        image: paolobonicco/hobbit-user:v1.3
         ports:
           - containerPort: 8082
         env:
