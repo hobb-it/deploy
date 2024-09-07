@@ -67,6 +67,24 @@ Per esporre il frontend e poterci collegare dal nostro browser eseguiamo il segu
 kubectl port-forward svc/hobbit-frontend 3000:3000
 ```
 
+## Integrazione Rabbit-MQ
+
+La nostra applicazione sfrutta il sistema di code per comunicazione asincrona offerto da RabbitMQ. Per utilizzarlo è necessario installare il deployment di rabbit su minikube.
+
+Per eseguire i seguenti comandi è necesasrio aver installato il gestore di pacchetti di minikube `helm`, le informazioni presenti a [questo link](https://helm.sh/docs/intro/install/).
+
+```bash
+helm repo add bitnami https://charts.bitnami.com/bitnami
+```
+
+```bash
+helm repo update
+```
+
+```bash
+helm install hobbit-notification bitnami/rabbitmq --namespace default -f rabbitmq/values.yaml
+```
+
 ## Accedi ad Hobb.it
 
 Seguendo questi semplici passaggi sarà possibile collegarsi all'applicazione tramite questo link [http://localhost:3000](http://localhost:3000).
