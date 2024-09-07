@@ -5,6 +5,8 @@ Questo repository contiene i file di configurazione dell’applicazione Hobb.it 
 Per effettuare il deploy, è necessario avere un’istanza di PostgreSQL per poter creare un database per ogni microservizio. Per semplicità, suggeriamo un comando per creare un unico database per entrambi i microservizi usando Docker.
 In alternativa, modificando i file di configurazione di Kubernetes, è possibile collegarsi a un’istanza su Google Cloud.
 
+Tutti i comandi vanno eseguiti nella cartella `deploy`.
+
 ## Creazione DB con Docker
 
 Comando per creare un database usando Docker:
