@@ -3,3 +3,6 @@
 comandi.md
 db-config.yml
 user-service-secret.yml
+
+k8s/gCloud
+
