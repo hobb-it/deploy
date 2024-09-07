@@ -1,31 +1,72 @@
-# Deploy
+# Deploy dell'Applicazione Hobb.it
 
-Per fare il deploy dell'applicazione bisogna creare due file:
+Questo repository contiene i file di configurazione dell’applicazione Hobb.it e i relativi comandi per avviarla.
 
-1. db-config.yml
-2. user-service-secret.yml
+Per effettuare il deploy, è necessario avere un’istanza di PostgreSQL per poter creare un database per ogni microservizio. Per semplicità, suggeriamo un comando per creare un unico database per entrambi i microservizi usando Docker.
+In alternativa, modificando i file di configurazione di Kubernetes, è possibile collegarsi a un’istanza su Google Cloud.
 
-Per creare questi file utilizzare i template forniti.
+## Creazione DB con Docker
 
-Dopo di che seguire i seguenti passi:
-
-```bash
-kubectl apply -f k8s/user-service/db-config.yml
-```
+Comando per creare un database usando Docker:
 
 ```bash
-kubectl apply -f k8s/user-service/user-service-secret.yml
+docker run --name hobbit-db -e POSTGRES_DB=users -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -p 5432:5432 -d postgres
 ```
 
-E infine 
+Con il seguente comando possiamo accedere al databsse appena creato su Docker:
 
 ```bash
-kubectl apply -f k8s/user-service/user.yml
+docker exec -it hobbit-db psql -U admin -d users
 ```
 
-## Collegamento a Google Cloud
+## Connessione al DB in Cloud
 
-In db-config.yml sostituisce data.db_url con:
-URL: "jdbc:postgresql://34.65.114.98:5432/user-db"
+Per utilizzare il database su Google Cloud modifica i file .yml dei microservizi interessati, user.yml e hobbycard.yml, aggiornando le credenziali di accesso e l’URL del database. 
 
-In user-service-secret.yml sostituisce db-username e db-password con base64encode di User e Password
+```yml
+env:
+  - name: DB_URL
+    value: "jdbc:postgresql://34.65.114.98:5432/users-db"
+  - name: DB_USERNAME
+    value: "username"
+  - name: DB_PASSWORD
+    value: "password"
+```
+
+`username` e `password` sono stati oscurati per motivi di sicurezza.
+
+## Avvio di Kubernetes
+
+Una volta creato il database, avviare Kubernetes tramite Minikube.
+
+Avvio minikube
+
+```bash
+minikube start
+```
+
+Caricamento dei file di configurazione, presenti nella cartella `k8s`
+
+```bash
+kubectl apply -f k8s
+```
+
+Questo comando crea i deployment dell'applicazione, e minikube si occuperà di creare i relativi pods.
+
+## Forwarding delle porte
+
+Per esporre i microservizi all’esterno, utilizzare il comando seguente:
+
+```bash
+minikube tunnel
+```
+
+Per esporre il frontend e poterci collegare dal nostro browser eseguiamo il seguente comando, che collegherà la porta interna di minikube alla porta della nostra macchina
+
+```bash
+kubectl port-forward svc/hobbit-frontend 3000:3000
+```
+
+## Accedi ad Hobb.it
+
+Seguendo questi semplici passaggi sarà possibile collegarsi all'applicazione tramite questo link [http://localhost:3000](http://localhost:3000).
